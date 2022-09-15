@@ -1,24 +1,9 @@
 #/bin/lbash
 
+set -ex
 cd `dirname $0`
-currentDir=$(pwd)
-domainName=
 
-# Check command is install
-checkCommand certbot
-checkCommand docker-compose
-
-# Run Nginx
-docker-compose up -d
-
-# Check connection
-checkConnection $domainName 80
-
-# 
-certbot certonly --webroot --force-renewal -w ${currentDir}/htlm -d $domainName
-
-# Stop Nginx
-docker-compose down
+domainName="<put fqdn to here>"
 
 checkCommand() {
   if ! command -v $1 &> /dev/null
@@ -40,3 +25,22 @@ then
   echo "$1:$2 connection is ready."
 fi
 }
+
+# Check command is install
+checkCommand dig
+checkCommand certbot
+checkCommand docker-compose
+
+# Run Nginx
+docker-compose up -d
+
+# Check connection
+publicIP=$(dig +short $domainName @resolver1.opendns.com)
+checkConnection $publicIP 80
+
+exit
+# run certbot
+certbot certonly --webroot --force-renewal -w ./html -d $domainName
+
+# Stop Nginx
+docker-compose down

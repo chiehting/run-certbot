@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  client:
+    image: nginx:1.23.0-alpine
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./html:/usr/share/nginx/html

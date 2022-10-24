@@ -5,7 +5,7 @@ Run certbot 執行 certbot 做憑證建立與更新.
 
 ## Getting Started
 
-執行流程包括:
+執行流程:
 
 - Check the commands is installed.
 - Run Nginx server.

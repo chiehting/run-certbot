@@ -20,7 +20,7 @@ Run certbot 執行 certbot 做憑證建立與更新.
 
 - [curl]
 - [dig]
-- [cerbot]
+- [certbot]
 - [docker]
 - [docker-compose]
 
